@@ -233,9 +233,8 @@ function Quote({ quote, i }) {
       */}
       <span
         aria-hidden
-        className={`pointer-events-none absolute -top-2 select-none font-serif text-[6rem] leading-none text-white/[0.06] md:text-[9rem] ${
-          alignRight ? "-right-3 md:-right-8" : "-left-3 md:-left-8"
-        }`}
+        className={`pointer-events-none absolute -top-2 select-none font-serif text-[6rem] leading-none text-white/[0.06] md:text-[9rem] ${alignRight ? "-right-3 md:-right-8" : "-left-3 md:-left-8"
+          }`}
       >
         &ldquo;
       </span>
@@ -381,7 +380,6 @@ export default function LifePage() {
         <div className="mx-auto mb-6 mt-8 max-w-3xl px-6 md:mb-10 md:px-10">
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
             <p className="text-[11px] uppercase tracking-[0.25em] text-accent">
-              {quotes.dates}
             </p>
             <p className="max-w-md text-sm leading-relaxed text-white/50">
               {quotes.blurb}

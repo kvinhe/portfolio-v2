@@ -27,7 +27,7 @@ const headline =
 
 const socialLinks = [
   { url: "https://www.linkedin.com/in/kvinhe/", label: "LinkedIn" },
-  { url: "https://github.com/kevinhe04", label: "GitHub" },
+  { url: "https://github.com/kvinhe", label: "GitHub" },
   { url: "mailto:kvn.04he@gmail.com", label: "Email" },
   { url: "https://www.instagram.com/kvin.he/", label: "Instagram" },
   { url: "https://www.youtube.com/@kvinhe", label: "YouTube" },

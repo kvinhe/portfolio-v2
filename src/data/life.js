@@ -77,7 +77,6 @@ export const exchange = {
 export const quotes = {
   title: "Quotes",
   // The oldest is Wilcox in 1883, the newest a football manga. Hence the range.
-  dates: "1883 — now",
   blurb:
     "Lines I keep coming back to. Read together they probably explain how I think better than the rest of this site does.",
   items: [
