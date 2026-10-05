@@ -31,7 +31,7 @@ export const exchange = {
   title: "Exchange 2026",
   dates: "Dec 2025 — May 2026",
   blurb:
-    "Studying abroad was a life-changing experience. Best time of my life.",
+    "Studying abroad was a life-changing experience. Here's a glimpse of the experiences I had!",
   films: [
     {
       youtube: "https://www.youtube.com/embed/biLJelWQ-AQ",
