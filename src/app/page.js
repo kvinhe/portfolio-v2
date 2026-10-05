@@ -23,7 +23,7 @@ function Divider() {
 }
 
 const headline =
-  "McGill Software Eng --- current focus... robotics!";
+  "Current focus: robotics!";
 
 const socialLinks = [
   { url: "https://www.linkedin.com/in/kvinhe/", label: "LinkedIn" },
