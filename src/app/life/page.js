@@ -382,7 +382,6 @@ export default function LifePage() {
             <p className="text-[11px] uppercase tracking-[0.25em] text-accent">
             </p>
             <p className="max-w-md text-sm leading-relaxed text-white/50">
-              {quotes.blurb}
             </p>
           </div>
         </div>
