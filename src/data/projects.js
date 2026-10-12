@@ -9,13 +9,9 @@ export const projects = [
     category: 'robotics',
     title: 'Robotic Arm',
     dates: 'Sep 2026 — Present',
-    blurb: 'A 4-DOF arm that autonomously completes Duolingo lessons on a physical phone.',
+    blurb: 'A 4-DOF robotic arm that interacts with your phone.',
     meta: ['C++', 'ESP32-S3', 'ROS 2', 'MuJoCo', 'OpenCV', 'Python'],
-    bullets: [
-      "Closed-form inverse kinematics and hand-eye calibration map a fixed-frame camera into the phone's plane; a VLM chooses the tap target.",
-      'Custom ESP32-S3 firmware in C++ drives 4 daisy-chained servos over a 1 Mbps half-duplex serial bus.',
-      'Validated in MuJoCo before touching hardware; teleoperated demonstrations logged as synchronized frames and joint states, with VLM tap accuracy benchmarked against a labeled eval set.',
-    ],
+    bullets: null,
     sections: [
       {
         eyebrow: 'Building',
