@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-  Palette is exposed as space-separated RGB channels so Tailwind's opacity
-  modifiers (e.g. divide-warm-200/70) keep working. Dark mode simply flips the
-  channel values under .dark — no per-component classes needed.
-*/
 :root {
   color-scheme: light;
 
@@ -56,7 +51,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Smooth the light/dark transition without animating layout */
 body {
   transition:
     background-color 0.3s ease,

@@ -12,11 +12,6 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.5, delay },
 });
 
-/*
-  A row goes wherever the project already points: if it has a link, that's the
-  destination. Only projects with no link of their own get a page at
-  /projects/<slug>. Add a link to one later and its row follows it instead.
-*/
 const rowLink = (project) =>
   project.links?.[0]?.href ?? `/projects/${project.slug}`;
 
@@ -70,7 +65,6 @@ export default function ProjectsSection() {
         <div className="divide-y divide-warm-200/70">
           {shown.map((project, i) => (
             <motion.div
-              // Keyed by tab as well, so rows re-animate when you switch.
               key={`${active}-${project.slug}`}
               {...fadeUp(i * 0.05)}
             >

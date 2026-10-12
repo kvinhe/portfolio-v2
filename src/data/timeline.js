@@ -1,27 +1,3 @@
-/*
-  ─────────────────────────────────────────────────────────────────────────
-  LIFE TIMELINE — things you've done, won, built, and where you've been.
-  Add an entry anywhere; it auto-sorts newest-first and groups by year.
-
-  How an entry behaves when clicked depends on its fields:
-    • has video / youtube / images  →  opens its own page at /timeline/<slug>
-    • has link (and no media)        →  opens that URL in a new tab (no page)
-    • none of the above              →  not clickable, opens nothing
-
-  Fields:
-    slug     unique id (used for the media-page URL)
-    date     "May 12, 2026" · "May 2026" · or "2023"
-    dateISO  sort key: "2026-05-12" · "2026-05" · "2023-05"
-    event    the headline
-    tag      optional → Award · Travel · Work · Launch · Hackathon · Robotics · Life
-    link     optional external URL (used only when there's no media)
-    video    optional local file  →  "/videos/Foo.mp4"
-    youtube  optional embed URL   →  "https://www.youtube.com/embed/ID"
-    images   optional array of photos → ["/images/Foo.jpg", ...]
-    body     optional text for the media page (currently unused — left off on purpose)
-  ─────────────────────────────────────────────────────────────────────────
-*/
-
 export const timeline = [
   {
     slug: "first-firmware",

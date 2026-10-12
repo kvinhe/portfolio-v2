@@ -5,11 +5,8 @@ import { ArrowUpRight } from "lucide-react";
 import ThemeToggle from "../components/themeToggle";
 import { timeline } from "@/data/timeline";
 
-// Drop the trailing year from the display date (the year is the group header):
-//   "July 12, 2026" → "July 12" · "July 2026" → "July" · "2023" → ""
 const shortDate = (date) => date.replace(/,?\s*\d{4}$/, "").trim();
 
-// What a row links to: video/youtube → its own page · link → external tab · else nothing.
 const resolveLink = (entry) => {
   if (entry.video || entry.youtube || (entry.images && entry.images.length))
     return { href: `/timeline/${entry.slug}`, external: false };
@@ -92,7 +89,6 @@ export default function TimelinePage() {
                     </span>
                   );
 
-                  // Not clickable — plain row.
                   if (!target) {
                     return (
                       <div
@@ -108,7 +104,6 @@ export default function TimelinePage() {
                     );
                   }
 
-                  // Clickable — internal video page or external link.
                   return (
                     <a
                       key={`${entry.slug}-${i}`}

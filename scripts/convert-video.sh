@@ -1,10 +1,4 @@
 #!/bin/bash
-# Convert .mov files to browser-compatible .mp4 (H.264, 1080p, 8-bit)
-#
-# Usage:
-#   ./scripts/convert-video.sh public/videos/MyVideo.mov
-#   ./scripts/convert-video.sh public/videos/*.mov    # batch convert
-
 set -euo pipefail
 
 if [ $# -eq 0 ]; then

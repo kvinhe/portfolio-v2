@@ -8,7 +8,6 @@ import { timeline } from "@/data/timeline";
 
 export default function TimelineEntryPage() {
   const { slug } = useParams();
-  // Only entries with media (video, youtube, or images) get a dedicated page.
   const entry = timeline.find(
     (e) =>
       e.slug === slug &&

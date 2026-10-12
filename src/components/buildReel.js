@@ -4,24 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Maximize2, Pause, Play } from "lucide-react";
 
-/**
- * A short build log played as one continuous reel.
- *
- * Anatomy:
- *   eyebrow + title ................................ total runtime
- *   ┌ stage ─────────────────────────────────────────────────────┐
- *   │ ● 01 / 02                                        fullscreen │
- *   │                                                             │
- *   │ 01  chapter title                               0:07 / 0:23 │
- *   │     caption                                            play │
- *   └─────────────────────────────────────────────────────────────┘
- *   [thumb 01 ━━━━━━━━━━──────]   [thumb 02 ────────────────────]
- *
- * Clips crossfade into each other and the reel advances on its own, so it
- * reads like one edit rather than two players. It plays muted and only
- * while on screen; with reduced motion it waits for a press instead.
- */
-
 const pad = (n) => String(n).padStart(2, "0");
 
 const timecode = (seconds) => {
@@ -30,7 +12,7 @@ const timecode = (seconds) => {
   return `${Math.floor(s / 60)}:${pad(s % 60)}`;
 };
 
-export default function BuildReel({ eyebrow = "Build log", title, clips }) {
+export default function BuildReel({ eyebrow = "Building", title, clips }) {
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(true);
   const [inView, setInView] = useState(false);
@@ -41,15 +23,12 @@ export default function BuildReel({ eyebrow = "Build log", title, clips }) {
   const fillRefs = useRef([]);
   const clockRef = useRef(null);
 
-  // Reduced motion: never start on our own.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setPlaying(false);
     }
   }, []);
 
-  // Metadata can land before hydration, in which case onLoadedMetadata
-  // never reaches React. Read whatever is already known on mount.
   useEffect(() => {
     setDurations(videoRefs.current.map((video) => video?.duration ?? NaN));
   }, []);
@@ -63,7 +42,6 @@ export default function BuildReel({ eyebrow = "Build log", title, clips }) {
     return () => observer.disconnect();
   }, []);
 
-  // Only the active clip ever runs; the rest sit paused at their start.
   useEffect(() => {
     videoRefs.current.forEach((video, i) => {
       if (!video) return;
@@ -75,8 +53,6 @@ export default function BuildReel({ eyebrow = "Build log", title, clips }) {
     });
   }, [active, playing, inView]);
 
-  // Progress and clock are painted per frame straight to the DOM, so the
-  // rail stays smooth without re-rendering React sixty times a second.
   useEffect(() => {
     let frame;
     const paint = () => {
@@ -158,13 +134,11 @@ export default function BuildReel({ eyebrow = "Build log", title, clips }) {
             }}
             aria-hidden={i !== active}
             style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-            className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[900ms] ${
-              i === active ? "scale-100 opacity-100" : "scale-[1.04] opacity-0"
-            }`}
+            className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[900ms] ${i === active ? "scale-100 opacity-100" : "scale-[1.04] opacity-0"
+              }`}
           />
         ))}
 
-        {/* The whole stage is the play/pause target. */}
         <button
           type="button"
           onClick={() => setPlaying((p) => !p)}
@@ -172,7 +146,6 @@ export default function BuildReel({ eyebrow = "Build log", title, clips }) {
           className="absolute inset-0 z-10 cursor-pointer focus-visible:outline-none"
         />
 
-        {/* Scrims keep the chrome legible over any frame. */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/45 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
@@ -198,10 +171,6 @@ export default function BuildReel({ eyebrow = "Build log", title, clips }) {
           </button>
         </div>
 
-        {/*
-          Big play affordance, only when stopped. Centred by a flex layer
-          rather than translate, since motion owns this element's transform.
-        */}
         <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
           <AnimatePresence>
             {!playing && (
@@ -259,7 +228,6 @@ export default function BuildReel({ eyebrow = "Build log", title, clips }) {
         </div>
       </div>
 
-      {/* Chapter rail — progress doubles as navigation. */}
       <div
         className="mt-3 grid gap-3"
         style={{ gridTemplateColumns: `repeat(${clips.length}, minmax(0, 1fr))` }}
@@ -270,9 +238,8 @@ export default function BuildReel({ eyebrow = "Build log", title, clips }) {
             type="button"
             onClick={() => goTo(i)}
             aria-current={i === active ? "step" : undefined}
-            className={`group/chapter flex cursor-pointer flex-col gap-3 rounded-xl p-2 text-left transition-colors duration-300 hover:bg-warm-100 ${
-              i === active ? "" : "opacity-60 hover:opacity-100"
-            }`}
+            className={`group/chapter flex cursor-pointer flex-col gap-3 rounded-xl p-2 text-left transition-colors duration-300 hover:bg-warm-100 ${i === active ? "" : "opacity-60 hover:opacity-100"
+              }`}
           >
             <span className="relative h-[2px] w-full overflow-hidden rounded-full bg-warm-200">
               <span

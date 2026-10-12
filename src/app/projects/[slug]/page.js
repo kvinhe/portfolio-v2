@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import * as motion from "motion/react-client";
-import { useParams } from "next/navigation";
-import { ArrowUpRight } from "lucide-react";
-import ThemeToggle from "../../components/themeToggle";
-import BuildReel from "@/components/buildReel";
-import { categories, projects } from "@/data/projects";
+import * as motion from 'motion/react-client';
+import { useParams } from 'next/navigation';
+import { ArrowUpRight } from 'lucide-react';
+import ThemeToggle from '../../components/themeToggle';
+import BuildReel from '@/components/buildReel';
+import { categories, projects } from '@/data/projects';
 
-const categoryLabel = (key) =>
-  categories.find((c) => c.key === key)?.label ?? key;
+const categoryLabel = (key) => categories.find((c) => c.key === key)?.label ?? key;
 
 export default function ProjectPage() {
   const { slug } = useParams();
@@ -39,10 +38,7 @@ export default function ProjectPage() {
             <p className="text-sm text-warm-400 tracking-wide mb-2">
               {project.dates}
               {project.category && (
-                <span className="text-warm-300">
-                  {" "}
-                  · {categoryLabel(project.category)}
-                </span>
+                <span className="text-warm-300"> · {categoryLabel(project.category)}</span>
               )}
             </p>
             <h1 className="text-3xl md:text-4xl font-serif text-warm-900 tracking-tight mb-6">
@@ -50,9 +46,7 @@ export default function ProjectPage() {
             </h1>
 
             {project.blurb && (
-              <p className="text-lg text-warm-600 leading-relaxed mb-8">
-                {project.blurb}
-              </p>
+              <p className="text-lg text-warm-600 leading-relaxed mb-8">{project.blurb}</p>
             )}
 
             {(project.video || project.youtube) && (
@@ -81,11 +75,7 @@ export default function ProjectPage() {
             )}
 
             {project.images && project.images.length > 0 && (
-              <div
-                className={
-                  project.images.length > 1 ? "mb-8 columns-2 gap-3" : "mb-8"
-                }
-              >
+              <div className={project.images.length > 1 ? 'mb-8 columns-2 gap-3' : 'mb-8'}>
                 {project.images.map((src, i) => (
                   <img
                     key={i}
@@ -100,35 +90,12 @@ export default function ProjectPage() {
             {project.bullets?.length > 0 && (
               <ul className="space-y-3">
                 {project.bullets.map((bullet, i) => (
-                  <li
-                    key={i}
-                    className="flex gap-2.5 text-warm-600 leading-relaxed"
-                  >
+                  <li key={i} className="flex gap-2.5 text-warm-600 leading-relaxed">
                     <span className="select-none text-accent/60">—</span>
                     <span>{bullet}</span>
                   </li>
                 ))}
               </ul>
-            )}
-
-            {project.build?.clips?.length > 0 && (
-              <BuildReel {...project.build} />
-            )}
-
-            {project.body && (
-              <div className="mt-8 space-y-5">
-                {project.body
-                  .trim()
-                  .split(/\n\n+/)
-                  .map((paragraph, i) => (
-                    <p
-                      key={i}
-                      className="text-warm-600 leading-relaxed whitespace-pre-line"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-              </div>
             )}
 
             {project.meta?.length > 0 && (
@@ -141,6 +108,24 @@ export default function ProjectPage() {
                     {item}
                   </span>
                 ))}
+              </div>
+            )}
+
+            {project.sections?.map(
+              (section) =>
+                section.clips?.length > 0 && <BuildReel key={section.title} {...section} />,
+            )}
+
+            {project.body && (
+              <div className="mt-8 space-y-5">
+                {project.body
+                  .trim()
+                  .split(/\n\n+/)
+                  .map((paragraph, i) => (
+                    <p key={i} className="text-warm-600 leading-relaxed whitespace-pre-line">
+                      {paragraph}
+                    </p>
+                  ))}
               </div>
             )}
 

@@ -1,16 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
 
-/**
- * Minimal editorial list row — replaces the old logo/pill cards.
- *
- * Anatomy (top to bottom):
- *   logo title ....................... dates      (baseline-aligned, date right)
- *   subtitle                                       (e.g. company · location)
- *   blurb                                          (always-visible one-liner)
- *   meta joined by " · "                           (light, e.g. skills/stack)
- *   details[]                                      (hidden on desktop until hover,
- *                                                   always shown on mobile)
- */
 function ListRow({
   dates,
   logo,

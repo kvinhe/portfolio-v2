@@ -5,27 +5,11 @@ import * as motion from "motion/react-client";
 import { ArrowLeft, Play, X } from "lucide-react";
 import { exchange, intro, quotes } from "@/data/life";
 
-/*
-  This page opts out of the site palette on purpose. The homepage is warm
-  paper, hairline rules and restraint; this is black, kinetic and loud. The
-  colours are hard-coded rather than themed so the contrast survives the
-  light/dark toggle — the jolt between the two pages IS the design.
-
-  The motion belongs to the footage: the page itself holds still.
-*/
-
 const isVideo = (item) => Boolean(item.src && item.src.endsWith(".mp4"));
 
-/* Film grain, inline so nothing extra crosses the network. */
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E\")";
 
-/* ── Section title ────────────────────────────────────────────────────── */
-
-/*
-  Static, at display size. The motion on this page belongs to the pictures —
-  a heading that slides past too is just noise competing with them.
-*/
 function SectionTitle({ text }) {
   return (
     <motion.h2
@@ -41,13 +25,6 @@ function SectionTitle({ text }) {
   );
 }
 
-/* ── Film grid ────────────────────────────────────────────────────────── */
-
-/*
-  A 3×2 grid pinned to the viewport height, so the whole body of work is in
-  one view. The set is small and finite — hiding any of it behind a scroll
-  or a swipe would only make it look bigger than it is.
-*/
 function FilmTile({ item, n, total, onOpen }) {
   return (
     <motion.button
@@ -60,8 +37,6 @@ function FilmTile({ item, n, total, onOpen }) {
       className="group relative block aspect-video w-full overflow-hidden text-left md:aspect-auto md:h-full"
     >
       {item.poster ? (
-        /* YouTube embeds can't self-thumbnail, so those two carry a still
-           pulled from img.youtube.com. */
         <img
           src={item.poster}
           alt={item.place}
@@ -70,9 +45,6 @@ function FilmTile({ item, n, total, onOpen }) {
           className="absolute inset-0 h-full w-full object-cover opacity-70 transition duration-[1200ms] ease-out group-hover:scale-[1.04] group-hover:opacity-100"
         />
       ) : (
-        /* A local clip paints its own first frame once metadata arrives, so
-           it needs no poster file. The #t=0.1 fragment nudges Safari, which
-           otherwise leaves the element blank until playback starts. */
         <video
           src={`${item.src}#t=0.1`}
           preload="metadata"
@@ -113,8 +85,6 @@ function FilmTile({ item, n, total, onOpen }) {
   );
 }
 
-/* ── Lightbox ──────────────────────────────────────────────────────────── */
-
 function Lightbox({ items, index, onClose, onStep }) {
   const item = items[index];
 
@@ -154,8 +124,6 @@ function Lightbox({ items, index, onClose, onStep }) {
         className="relative max-h-full w-full max-w-5xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* The video element only exists here, so a 65 MB clip downloads
-            when someone asks to watch it and not one moment earlier. */}
         {isVideo(item) ? (
           <video
             key={item.src}
@@ -202,14 +170,6 @@ function Lightbox({ items, index, onClose, onStep }) {
   );
 }
 
-/* ── Quotes ───────────────────────────────────────────────────────────── */
-
-/*
-  Type scale is a function of length: a short line earns the full display
-  size, a long one steps down so it stays readable at speed. Without this
-  every quote gets the same treatment and the longest one wins by default,
-  which is the opposite of what you want.
-*/
 const quoteScale = (text) => {
   if (text.length < 80) return "text-2xl md:text-4xl";
   if (text.length < 130) return "text-xl md:text-3xl";
@@ -227,10 +187,6 @@ function Quote({ quote, i }) {
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       className={`relative py-8 md:py-10 ${alignRight ? "md:ml-auto md:text-right" : ""} max-w-2xl`}
     >
-      {/*
-        An oversized quotation mark as watermark, bled off the edge and set
-        low enough in opacity to read as texture rather than as punctuation.
-      */}
       <span
         aria-hidden
         className={`pointer-events-none absolute -top-2 select-none font-serif text-[6rem] leading-none text-white/[0.06] md:text-[9rem] ${alignRight ? "-right-3 md:-right-8" : "-left-3 md:-left-8"
@@ -267,8 +223,6 @@ function Quote({ quote, i }) {
   );
 }
 
-/* ── Page ──────────────────────────────────────────────────────────────── */
-
 export default function LifePage() {
   const [open, setOpen] = useState(null);
 
@@ -288,8 +242,6 @@ export default function LifePage() {
         style={{ backgroundImage: GRAIN }}
       />
 
-      {/* Hero — type only. The photographs start below the fold, so the first
-          thing felt is the drop in temperature. */}
       <section className="relative flex min-h-[88vh] flex-col justify-between px-6 pb-10 pt-8 md:px-10 md:pb-14">
         <div className="flex items-center justify-between">
           <a
@@ -309,7 +261,6 @@ export default function LifePage() {
 
         <div>
           <h1 className="font-serif text-[16vw] leading-[0.82] tracking-[-0.03em] text-white md:text-[11vw]">
-            {/* One word per line, each arriving a beat after the last. */}
             {intro.title.split(" ").map((word, i, words) => (
               <motion.span
                 key={word}
@@ -356,10 +307,6 @@ export default function LifePage() {
           </div>
         </div>
 
-        {/*
-          Fixed grid height on desktop so all six land inside one viewport;
-          on mobile it falls back to 16:9 tiles.
-        */}
         <div className="grid grid-cols-1 gap-2 px-6 sm:grid-cols-2 md:h-[72vh] md:grid-cols-3 md:grid-rows-2 md:px-10">
           {films.map((film, i) => (
             <FilmTile
@@ -376,7 +323,6 @@ export default function LifePage() {
       <section className="border-t border-white/10 py-12 md:py-16">
         <SectionTitle text={quotes.title} />
 
-        {/* Same header row as the films above, so the two sections rhyme. */}
         <div className="mx-auto mb-6 mt-8 max-w-3xl px-6 md:mb-10 md:px-10">
           <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
             <p className="text-[11px] uppercase tracking-[0.25em] text-accent">
