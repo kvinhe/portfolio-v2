@@ -97,15 +97,25 @@ export default function Home() {
           <div className="divide-y divide-warm-200/70">
             <motion.div {...fadeUp(0)}>
               <ListRow
-                dates="Jun 2026 — Present"
-                logo="/images/logos/AWL_logo.jpeg"
-                title="Systems Integration Engineer Intern"
-                subtitle="AWL-Electricity · Montreal, Canada"
-                meta={["C++", "Python", "Altium", "PCB bring-up"]}
-                link="https://www.awl-e.com/"
+                dates="Oct 2026 — Present"
+                logo="/images/logos/mecka_logo.png"
+                title="Supply Chain & Quality Engineer Intern"
+                subtitle="Mecka · Asia"
+                meta={["Quality control", "Hardware testing", "Manufacturing", "Supply chain"]}
+                link="https://www.mecka.ai/"
               />
             </motion.div>
             <motion.div {...fadeUp(0.06)}>
+              <ListRow
+                dates="Jun — Oct 2026"
+                logo="/images/logos/AWL_logo.jpeg"
+                title="Systems Integration Engineer Intern"
+                subtitle="AWL-Electricity · Montreal, Canada"
+                meta={["PCB bring-up", "Client representation"]}
+                link="https://www.awl-e.com/"
+              />
+            </motion.div>
+            <motion.div {...fadeUp(0.12)}>
               <ListRow
                 dates="Sep — Dec 2025"
                 logo="/images/logos/autodesk_logo.jpg"
@@ -115,7 +125,7 @@ export default function Home() {
                 link="https://www.autodesk.com/"
               />
             </motion.div>
-            <motion.div {...fadeUp(0.12)}>
+            <motion.div {...fadeUp(0.18)}>
               <ListRow
                 dates="May — Aug 2025"
                 logo="/images/logos/sunlife_logo.png"
@@ -125,7 +135,7 @@ export default function Home() {
                 link="https://www.sunlife.ca/en/"
               />
             </motion.div>
-            <motion.div {...fadeUp(0.18)}>
+            <motion.div {...fadeUp(0.24)}>
               <ListRow
                 dates="May — Aug 2024"
                 logo="/images/logos/tedy_logo.png"
