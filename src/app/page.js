@@ -99,7 +99,7 @@ export default function Home() {
               <ListRow
                 dates="Oct 2026 — Present"
                 logo="/images/logos/mecka_logo.png"
-                title="Hardware Operations"
+                title="Hardware Operations Intern"
                 subtitle="Mecka · Asia"
                 meta={["Quality control", "Hardware testing", "Manufacturing", "Supply chain"]}
                 link="https://www.mecka.ai/"
