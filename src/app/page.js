@@ -99,7 +99,7 @@ export default function Home() {
               <ListRow
                 dates="Oct 2026 — Present"
                 logo="/images/logos/mecka_logo.png"
-                title="Supply Chain & Quality Engineer Intern"
+                title="Hardware Operations"
                 subtitle="Mecka · Asia"
                 meta={["Quality control", "Hardware testing", "Manufacturing", "Supply chain"]}
                 link="https://www.mecka.ai/"
